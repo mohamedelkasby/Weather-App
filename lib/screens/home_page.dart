@@ -1,49 +1,27 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:weather_app/cubits/cubit.dart';
-// import 'package:weather_app/cubits/states.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_app/cubits/weather_cubit.dart';
+import 'package:weather_app/cubits/weather_states.dart';
 import 'package:weather_app/screens/search_dailog.dart';
-import 'package:weather_app/models/weather_model.dart';
-import 'package:weather_app/services/services.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-//   const HomePage({
-  String region = "Cairo";
-  var whether;
-  late WeatherModel weatherModel;
-
-  @override
-  void initState() {
-    whether = Weather().getWeather(region);
-
-    super.initState();
-  }
+class HomePage extends StatelessWidget {
+  HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    bool isDay = false;
+    return BlocConsumer<WeatherCubit, WeatherState>(
+      listener: (context, state) {},
+      builder: (context, state) {
+        if (state is WeatherLoadingState) {
+          return const Center(
+            child: CircularProgressIndicator(),
+          );
+        } else if (state is WeatherLoadedState) {
+          final weatherModel = state.weatherModel;
 
-    // return BlocProvider(
-    // create: (context) => WeatherCubit(),
-    // child: BlocBuilder<WeatherCubit, WeatherState>(
-    //   // listener: (context, state) {},
-    // builder: (context, state) {
-    // WeatherCubit bloc = WeatherCubit.get(context);
-    return FutureBuilder<WeatherModel>(
-      future: whether,
-      builder: (context, snapshot) {
-        // print(state); //this was for cubit state
-        if (snapshot.hasData) {
-          weatherModel = snapshot.data!;
-          isDay = (weatherModel.isDay == 1);
+          final bool isDay = (weatherModel.isDay == 1);
+
           return Scaffold(
             resizeToAvoidBottomInset: false,
             body: Container(
@@ -91,19 +69,14 @@ class _HomePageState extends State<HomePage> {
                             ),
                           ],
                         ),
-                        // const SizedBox(
-                        //   width: 90,
-                        // ),
-                        // const SearchDailog()
                         IconButton(
                           onPressed: () {
                             showDialog(
                               context: context,
-                              builder: (context) => const SearchDailog(),
+                              builder: (context) => const SearchDialog(),
                             ).then((value) {
                               if (value != null) {
-                                region = value;
-                                // bloc.getWeather(bloc.region);
+                                WeatherCubit.get(context).getWeather(value);
                               }
                             });
                           },
@@ -160,24 +133,24 @@ class _HomePageState extends State<HomePage> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "${weatherModel.temp}°",
+                            style: TextStyle(
+                                fontSize: 80,
+                                color: isDay ? Colors.black : Colors.white),
+                          ),
+                          Text(
+                            "Feels like ${weatherModel.tempFeelslike}°",
+                            style: TextStyle(
+                                color: isDay ? Colors.black : Colors.white),
+                          ),
+                        ],
+                      ),
                       Row(
                         children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                "${weatherModel.temp}°",
-                                style: TextStyle(
-                                    fontSize: 80,
-                                    color: isDay ? Colors.black : Colors.white),
-                              ),
-                              Text(
-                                "Feels like ${weatherModel.tempFeelslike}°",
-                                style: TextStyle(
-                                    color: isDay ? Colors.black : Colors.white),
-                              ),
-                            ],
-                          ),
                           const SizedBox(
                             width: 15,
                           ),
