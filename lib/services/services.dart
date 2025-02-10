@@ -1,10 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:weather_app/const.dart';
 import 'package:weather_app/models/search_country_model.dart';
 import 'package:weather_app/models/weather_model.dart';
 
 class Weather {
   final dio = Dio();
-  final String apiKey = "ed1f9f2df0d1452b8ed203621240603";
   final String baseURL = "https://api.weatherapi.com/v1";
 
   Future<List<SearchCountryModel>> searchCountryModel(String country) async {

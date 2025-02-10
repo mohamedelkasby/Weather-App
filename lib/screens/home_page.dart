@@ -67,7 +67,8 @@ class HomePage extends StatelessWidget {
                                 weatherModel.condition,
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: textColor.withOpacity(0.8),
+                                  color:
+                                      textColor.withAlpha((0.8 * 255).toInt()),
                                 ),
                               ),
                             ],
@@ -86,7 +87,8 @@ class HomePage extends StatelessWidget {
                             icon: Container(
                               padding: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: primaryColor.withOpacity(0.2),
+                                color:
+                                    primaryColor.withAlpha((0.2 * 255).toInt()),
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               child: Icon(
@@ -105,11 +107,11 @@ class HomePage extends StatelessWidget {
                       margin: const EdgeInsets.all(20),
                       padding: const EdgeInsets.all(25),
                       decoration: BoxDecoration(
-                        color: primaryColor.withOpacity(0.15),
+                        color: primaryColor.withAlpha((0.15 * 255).toInt()),
                         borderRadius: BorderRadius.circular(25),
                         boxShadow: [
                           BoxShadow(
-                            color: primaryColor.withOpacity(0.1),
+                            color: primaryColor.withAlpha((0.1 * 255).toInt()),
                             blurRadius: 20,
                             spreadRadius: 2,
                           )
@@ -137,7 +139,8 @@ class HomePage extends StatelessWidget {
                                   'C',
                                   style: TextStyle(
                                     fontSize: 24,
-                                    color: textColor.withOpacity(0.7),
+                                    color: textColor
+                                        .withAlpha((0.7 * 255).toInt()),
                                   ),
                                 ),
                               ),
@@ -147,7 +150,7 @@ class HomePage extends StatelessWidget {
                             'Feels like ${weatherModel.tempFeelslike}°',
                             style: TextStyle(
                               fontSize: 16,
-                              color: textColor.withOpacity(0.8),
+                              color: textColor.withAlpha((0.8 * 255).toInt()),
                             ),
                           ),
                           const SizedBox(height: 20),
@@ -178,7 +181,8 @@ class HomePage extends StatelessWidget {
                             Container(
                               padding: const EdgeInsets.all(15),
                               decoration: BoxDecoration(
-                                color: secondaryColor.withOpacity(0.2),
+                                color: secondaryColor
+                                    .withAlpha((0.2 * 255).toInt()),
                                 borderRadius: BorderRadius.circular(20),
                               ),
                               child: Row(
@@ -211,7 +215,7 @@ class HomePage extends StatelessWidget {
                               'Last updated: ${weatherModel.lastUpdated}',
                               style: TextStyle(
                                 fontSize: 14,
-                                color: textColor.withOpacity(0.6),
+                                color: textColor.withAlpha((0.6 * 255).toInt()),
                               ),
                             ),
                           ],
@@ -290,7 +294,7 @@ class HomePage extends StatelessWidget {
           date,
           style: TextStyle(
             fontSize: 14,
-            color: textColor.withOpacity(0.8),
+            color: textColor.withAlpha((0.8 * 255).toInt()),
           ),
         ),
         const SizedBox(height: 8),

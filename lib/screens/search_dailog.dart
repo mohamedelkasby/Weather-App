@@ -78,7 +78,7 @@ class _SearchDialogState extends State<SearchDialog> {
                       ),
                       filled: true,
                       fillColor: isDark
-                          ? Colors.grey[800]!.withOpacity(0.4)
+                          ? Colors.grey[800]!.withAlpha((0.4 * 255).toInt())
                           : Colors.grey[100]!,
                     ),
                   ),
@@ -110,7 +110,7 @@ class _SearchDialogState extends State<SearchDialog> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
                   decoration: BoxDecoration(
-                    color: theme.primaryColor.withOpacity(0.1),
+                    color: theme.primaryColor.withAlpha((0.1 * 255).toInt()),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Row(
